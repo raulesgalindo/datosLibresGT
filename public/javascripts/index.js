@@ -7,11 +7,26 @@ function getData(){
         'limit': 5
       },
       cache: true,
-      dataType: 'jsonp'
-    }).then(function(data) {
-      console.log('data:', data);
-      var result = data.result;
-      console.log('Result:', result);
-      console.log('Records:', result.records);      
+      dataType: 'jsonp',
+      success: function(data){
+        var result = data.result;
+        console.log('Records:', result.records);     
+        $.ajax({
+          url: 'http://localhost:3000/db/insert/presupuesto',  
+          method: 'POST',
+          data: JSON.stringify(result.records),
+          contentType: "application/json",
+          success: function(data) {
+            console.log('Inserted');
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+           console.log(errorThrown);
+         }
+        });
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+       console.log(errorThrown);
+     }
     });
-  }
+}
+
