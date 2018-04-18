@@ -6,7 +6,6 @@
     <link href="css/dashboard.css" rel="stylesheet">
   </head>
   <body>
-    <button type="button" onclick="getData()">-Ver Data1</button></br>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
@@ -20,6 +19,8 @@
         <div class="row">
           <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
+              <button type="button" onclick="getData()">-Obtener e insertar</button></br>
+              <button type="button" onclick="graphTop()">-Graficar</button></br>
               <ul class="nav flex-column">
                 <li class="nav-item">
                   <a class="nav-link active" href="#">
@@ -101,7 +102,7 @@
       </div>
     </div>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="/javascripts/index.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>

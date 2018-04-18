@@ -4,6 +4,7 @@ var express = require('express'),
 
 // Test mongo connection
 router.get('/', mongoController.connect);
+router.get('/get/presupuesto/', mongoController.get);
 
 router.post('/insert/presupuesto/', mongoController.insert);
 
