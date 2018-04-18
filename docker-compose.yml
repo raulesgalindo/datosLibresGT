@@ -3,7 +3,7 @@ services:
   app:
     container_name: datosLibresGT
     restart: always
-    build: .
+    build: app
     ports:
       - "3000:3000"
     links:
