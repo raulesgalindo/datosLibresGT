@@ -1,16 +1,15 @@
-function insertData(){
+function insertData() {
     $.ajax({
-        url: 'https://datos.minfin.gob.gt/api/3/action/datastore_search',
+        url: 'https://datos.minfin.gob.gt/api/3/action/datastore_search_sql',
         method: 'GET',
         data: {
-            'resource_id': '105c966a-b71f-4db6-8e8e-caacca249823',
-            'limit': 5
+            'sql': 'SELECT * FROM "105c966a-b71f-4db6-8e8e-caacca249823"'
         },
         cache: true,
         dataType: 'jsonp',
         success: function (data) {
             var result = data.result;
-            console.log('Records:', result.records);
+            console.log('Records inserted:', result.records.length);
             $.ajax({
                 url: 'http://localhost:3000/db/insert/presupuesto',
                 method: 'POST',
