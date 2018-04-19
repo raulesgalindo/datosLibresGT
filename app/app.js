@@ -11,9 +11,13 @@ var indexRouter = require('./routes/index'),
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+//app.set('views', path.join(__dirname, 'views'));
+//app.engine('html', require('ejs').renderFile);
+//app.set('view engine', 'html');
+
+// set up the template engine
+app.set('views', './views');
+app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());

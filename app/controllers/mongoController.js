@@ -1,8 +1,8 @@
 var express = require('express'),
     router = express.Router(),
     mongoClient = require('mongodb').MongoClient,
-    dbUrl = 'mongodb://127.0.0.1:27017/',
-    //dbUrl = 'mongodb://mongo:27017/';
+    //dbUrl = 'mongodb://127.0.0.1:27017/',
+    dbUrl = 'mongodb://mongo:27017/';
 
     connect = function () {
         mongoClient.connect(dbUrl, function (err, db) {
