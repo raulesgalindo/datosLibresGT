@@ -5,15 +5,15 @@ var indexRouter = require('./routes/index'),
     createError = require('http-errors'),
     bodyParser = require('body-parser'),
     express = require('express'),
-    logger = require('morgan');
-    path = require('path');
+    logger = require('morgan'),
+    path = require('path'),
     app = express();
 
 
 // view engine setup
+app.engine('pug', require('pug').__express)
 app.set('views', path.join(__dirname, 'views'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+app.set("view engine", "pug");
 
 app.use(logger('dev'));
 app.use(express.json({limit: '50mb'}));
