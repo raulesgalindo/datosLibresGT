@@ -11,7 +11,7 @@ function insertData() {
             var result = data.result;
             console.log('Records inserted:', result.records.length);
             $.ajax({
-                url: 'http://localhost:3000/db/insert/presupuesto',
+                url: 'http://datoslibresgt.me:3000/db/insert/presupuesto',
                 method: 'POST',
                 data: JSON.stringify(result.records),
                 contentType: "application/json",
@@ -27,7 +27,7 @@ function insertData() {
 }
 
 function graphTop() {
-    $.get("http://localhost:3000/db/get/presupuesto", function (data, status) {
+    $.get("http://datoslibresgt.me:3000/db/get/presupuesto", function (data, status) {
         var json = data,
             ctx = document.getElementById("myChart").getContext('2d');
         var labels = json.result.map(function (data) {
