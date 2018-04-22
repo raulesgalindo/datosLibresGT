@@ -1,3 +1,5 @@
 extends layout.pug
 block content
-  hola Desde Indexcmabios
+    button(type='button' onclick='insertData()') -Obtener e insertar
+    button(type='button' onclick='graphTop()') -Graficar
+    canvas#myChart.my-4.w-100(width='900' height='380')
