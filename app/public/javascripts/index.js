@@ -26,6 +26,35 @@ function insertData() {
     });
 }
 
+
+function insertDataMongo(urlGetData, sql, urlInsertData) {
+    $.ajax({
+        url: urlGetData,
+        method: 'GET',
+        data: {
+            'sql': sql
+        },
+        cache: true,
+        dataType: 'jsonp',
+        success: function (data) {
+            var result = data.result;
+            console.log('Records inserted:', result.records.length);
+            $.ajax({
+                url: urlInsertData,
+                method: 'POST',
+                data: JSON.stringify(result.records),
+                contentType: "application/json",
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  console.log(errorThrown);
+                }
+            });
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          console.log(errorThrown);
+        }
+    });
+}
+
 function graphTop() {
     $.get("http://localhost:3000/db/get/presupuesto", function (data, status) {
         var json = data,

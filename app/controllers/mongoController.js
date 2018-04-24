@@ -38,6 +38,23 @@ var express = require('express'),
             });
         });
     },
+    insertMongo = function (req, collectionName){
+        mongoClient.connect(dbUrl, function (err, db) {
+            if (err) {
+                throw err;
+            }
+            var database = db.db('datosLibres');
+            database.collection(collectionName).update({name: "top" },
+                {name: "top", result: req.body},
+                {upsert: true }, function (err) {
+                if (err) {
+                    throw err;
+                }
+                console.log("1 document inserted");
+                db.close();
+            });
+        });
+    },
 
     get = function (req, res) {
         mongoClient.connect(dbUrl, function (err, db) {
