@@ -2,11 +2,13 @@
     "db": "datosLibres",
     "collection":"rubrosfederacionesdeportivas",
     "codeSource":"e18f2603-ae8f-4931-9f45-bceed7597b45",
+    "batchSize":500,
     "apiUrl":"https://datos.minfin.gob.gt/api/3/action/datastore_search_sql"
 },
 {
     "db": "datosLibres",
     "collection":"gastosgubernamentales",
     "codeSource":"29e38c4a-74ee-44b0-a4bb-e40259f89400",
+    "batchSize":500,
     "apiUrl":"https://datos.minfin.gob.gt/api/3/action/datastore_search_sql"
 }]
