@@ -45,11 +45,15 @@ var express = require('express'),
                 throw err;
             }
             var dbo = db.db("datosLibres");
-            dbo.collection("presupuesto").findOne({name: "top"}, function (err, result) {
+            dbo.collection("rubrosfederacionesdeportivas").find()
+            .where("UNIDAD EJECUTORA").regex(/^FEDERACIÓN/i)
+           // .select('NOMBRE ENTIDAD','NOMBRE GRUPO GASTO','NOMBRE RENGLÓN')
+            .exec(function (err, result) {
                 if (err) {
                     throw err;
                 }
                 db.close();
+                console.log(result);
                 res.send(result);
             });
         });

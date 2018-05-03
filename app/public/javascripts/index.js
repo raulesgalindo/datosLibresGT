@@ -31,10 +31,11 @@ function graphTop() {
         var json = data,
             ctx = document.getElementById("myChart").getContext('2d');
         var labels = json.result.map(function (data) {
-                return data.Entidad;
+                console.log(data);
+                //return data.Entidad;
             }),
             chartData = json.result.map(function (data) {
-                return data.Devengado;
+                //return data.Devengado;
             });
         var config = {
             type: 'line',
