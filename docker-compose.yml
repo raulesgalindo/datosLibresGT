@@ -8,11 +8,11 @@ services:
       - "3000:3000"
     links:
       - mongo
-  python:
-    container_name: pythonInitialData
-    build: python
-    links:
-      - mongo
+  #python:
+    #container_name: pythonInitialData
+    #build: python
+    #links:
+    #  - mongo
   mongo:
     container_name: mongo
     image: mongo

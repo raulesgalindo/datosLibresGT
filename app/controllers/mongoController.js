@@ -1,8 +1,10 @@
 var express = require('express'),
     router = express.Router(),
-    mongoClient = require('mongodb').MongoClient,
+    mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
+    //mongoClient = require('mongodb').MongoClient,
     //dbUrl = 'mongodb://127.0.0.1:27017/',
-    dbUrl = 'mongodb://mongo:27017/';
+    dbUrl = 'mongodb://mongo:27017/datosLibres';
 
     connect = function () {
         mongoClient.connect(dbUrl, function (err, db) {
@@ -40,15 +42,22 @@ var express = require('express'),
     },
 
     get = function (req, res) {
-        mongoClient.connect(dbUrl, function (err, db) {
-            if (err) {
-                throw err;
-            }
-            var dbo = db.db("datosLibres");
-            dbo.collection("rubrosfederacionesdeportivas").find()
-            .where("UNIDAD EJECUTORA").regex(/^FEDERACIÓN/i)
-           // .select('NOMBRE ENTIDAD','NOMBRE GRUPO GASTO','NOMBRE RENGLÓN')
-            .exec(function (err, result) {
+        mongoose.connect(dbUrl);
+        var db = mongoose.connection;
+        db.on('error', console.error.bind(console, 'connection error:'));
+        db.once('open', function() {
+            var rubroSchema   = new Schema({
+                _id: {type:String},
+                "NOMBRE ENTIDAD": {type:String},
+                "NOMBRE GRUPO GASTO": {type:String},
+            
+            });
+            var rubros = mongoose.model('rubrosfederacionesdeportivas', rubroSchema);
+            var query = rubros.find();
+            //db.collection("rubrosfederacionesdeportivas").find()
+            query.where("UNIDAD EJECUTORA").regex(/^FEDERACIÓN/i);
+            query.select({"NOMBRE ENTIDAD":1, "NOMBRE GRUPO GASTO":1, "NOMBRE RENGLÓN":1,"ASIGNADO":1,"_id":0});
+            query.exec(function (err, result) {
                 if (err) {
                     throw err;
                 }
@@ -56,6 +65,8 @@ var express = require('express'),
                 console.log(result);
                 res.send(result);
             });
+        
+            // we're connected!
         });
     };
 
