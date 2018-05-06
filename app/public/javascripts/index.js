@@ -27,11 +27,26 @@ function insertData() {
 }
 
 function graphTop() {
-    $.get("http://localhost:3000/db/get/presupuesto", function (data, status) {
-        var json = data,
+    $.get("http://localhost:3000/db/get/presupuesto", function (data, status) { 
+        var arrayLength = data.length;
+        var montosAsignadosEntidad = {};
+        for (var i = 0; i < arrayLength; i++) {
+            var nombreFederacion = data[i]["NOMBRE ENTIDAD"];
+            if(montosAsignadosEntidad[nombreFederacion]==null){
+                montosAsignadosEntidad[nombreFederacion] = parseInt(data[i]["ASIGNADO"]);
+            }else{
+                montosAsignadosEntidad[nombreFederacion] += parseInt(data[i]["ASIGNADO"]);
+            }
+        }
+        debugger;
+        json.result.map(function (data){
+            document.getElementById("divTablaAsc").innerHTML = data;
+        });
+        //var json = data,
             ctx = document.getElementById("myChart").getContext('2d');
         var labels = json.result.map(function (data) {
-                console.log(data);
+            var dict = {};
+            console.log(data);
                 //return data.Entidad;
             }),
             chartData = json.result.map(function (data) {
