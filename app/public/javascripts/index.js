@@ -1,52 +1,29 @@
-function insertData() {
-    $.ajax({
-        url: 'https://datos.minfin.gob.gt/api/3/action/datastore_search_sql',
-        method: 'GET',
-        data: {
-            'sql': 'SELECT * FROM "105c966a-b71f-4db6-8e8e-caacca249823"'
-        },
-        cache: true,
-        dataType: 'jsonp',
-        success: function (data) {
-            var result = data.result;
-            console.log('Records inserted:', result.records.length);
-            $.ajax({
-                url: 'http://localhost:3000/db/insert/presupuesto',
-                method: 'POST',
-                data: JSON.stringify(result.records),
-                contentType: "application/json",
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                  console.log(errorThrown);
-                }
-            });
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-          console.log(errorThrown);
-        }
-    });
-}
-
-function graphTop() {
+function graphTop() 
+{
     $.get("http://localhost:3000/db/get/presupuesto", function (data, status) { 
         var arrayLength = data.length;
         var montosAsignadosEntidad = {};
+        var cantidadSolicitudesEntidad = {};
+        var montoTotalAsignado = 0;
         for (var i = 0; i < arrayLength; i++) {
             var nombreFederacion = data[i]["NOMBRE ENTIDAD"];
+            var montoAsignado = parseInt(data[i]["ASIGNADO"]);
             if(montosAsignadosEntidad[nombreFederacion]==null){
-                montosAsignadosEntidad[nombreFederacion] = parseInt(data[i]["ASIGNADO"]);
+                montosAsignadosEntidad[nombreFederacion] = montoAsignado;
+                cantidadSolicitudesEntidad[nombreFederacion] = 1;
             }else{
-                montosAsignadosEntidad[nombreFederacion] += parseInt(data[i]["ASIGNADO"]);
+                montosAsignadosEntidad[nombreFederacion] += montoAsignado;
+                cantidadSolicitudesEntidad[nombreFederacion]++;
             }
+            montoTotalAsignado += montoAsignado;
         }
+        addTotalRegistro(arrayLength);
+        addTotalAsignadoFederacion(montoTotalAsignado);
+        drawAsignadoFederacion(montosAsignadosEntidad);
         debugger;
-        json.result.map(function (data){
-            document.getElementById("divTablaAsc").innerHTML = data;
-        });
         //var json = data,
             ctx = document.getElementById("myChart").getContext('2d');
         var labels = json.result.map(function (data) {
-            var dict = {};
-            console.log(data);
                 //return data.Entidad;
             }),
             chartData = json.result.map(function (data) {
@@ -66,3 +43,38 @@ function graphTop() {
         var chart = new Chart(ctx, config);
     });
 }
+function toCurrency(nStr)
+{
+	return 'Q' + nStr.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+}
+function addCommas(nStr)
+{
+	return nStr.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+}
+function addTotalRegistro(totalRegistros)
+{
+    document.getElementById("divTotalRegistros").innerHTML = addCommas(totalRegistros);
+}
+function addTotalAsignadoFederacion(totalAsignado)
+{
+    document.getElementById("divTotalAsignadoFederacion").innerHTML = toCurrency(totalAsignado);
+}
+function drawAsignadoFederacion(montosAsignadosEntidad){
+    var contenido = "<table class=\"table table-striped\">"
+									+"<thead>"
+									  +"<tr>"
+									  +"<th>Federacion</th>"
+									  +"<th>Monto Asignado</th>"
+									+"</thead>"
+									+"<tbody>";
+    for (var entidad in montosAsignadosEntidad) {
+        var contenidoRegistro = "<tr>"
+                                    +"<td>"+entidad+"</td>"
+                                    +"<td>"+toCurrency(montosAsignadosEntidad[entidad])+"</td>"
+								+"</tr>";
+		contenido = contenido + contenidoRegistro;
+    }
+    contenido = contenido + "</tbody></table>";
+    document.getElementById("divAsignadoFederacion").innerHTML = contenido;
+}
+graphTop();
