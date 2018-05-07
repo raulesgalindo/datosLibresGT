@@ -1,7 +1,7 @@
 function graphTop() 
 {
     debugger;
-    $.get("http://localhost:3000/db/get/presupuesto", function (data, status) { 
+    $.get("http://datoslibresgt.me:3000/db/get/presupuesto", function (data, status) { 
         debugger;
         var arrayLength = data.length;
         var montosAsignadosEntidad = {};
