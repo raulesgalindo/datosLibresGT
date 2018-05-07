@@ -8,21 +8,21 @@ block content
         // /.col-lg-12
       // /.row
       .row
-        .card.text-white.bg-dark.mt-1.col-md-12.col-lg-3
-          .card-header.h3 Cantidad de Solicitudes
+        .card.text-white.bg-dark.mt-1.col-md-12.col-lg-5
+          .card-header.h3 Cantidad Total de Solicitudes
           .card-body
-            #divTotalRegistros.huge.card-title.center
-        .card.text-white.bg-dark.mt-1.col-md-12.col-lg-9
-          .card-header.h3 Monto Asignado a Federaciones
+            #divTotalRegistros.card-title.center
+              img(src='images/loader.gif', height='256', width='256')
+        .card.text-white.bg-dark.mt-1.col-md-12.col-lg-7
+          .card-header.h3 Monto Asignado a Federaciones 
           .card-body
-            #divTotalAsignadoFederacion.huge.card-title.center
+            #divTotalAsignadoFederacion.card-title.center
+              img(src='images/loader.gif', height='256', width='256')
       // /.row
       .row
         .col-lg-8
-          canvas#myChart.my-4.w-100(width='900' height='380')
+          canvas#myChart.my-4.w-100
         .col-lg-4
           #divAsignadoFederacion
+            img(src='images/loader.gif', height='256', width='256')
           
-    button(type='button' onclick='insertData()') -Obtener e insertar
-    button(type='button' onclick='graphTop()') -Graficar
-

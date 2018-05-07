@@ -20,32 +20,12 @@ function graphTop()
         addTotalRegistro(arrayLength);
         addTotalAsignadoFederacion(montoTotalAsignado);
         drawAsignadoFederacion(montosAsignadosEntidad);
-        debugger;
-        //var json = data,
-            ctx = document.getElementById("myChart").getContext('2d');
-        var labels = json.result.map(function (data) {
-                //return data.Entidad;
-            }),
-            chartData = json.result.map(function (data) {
-                //return data.Devengado;
-            });
-        var config = {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Graph Line',
-                    data: chartData,
-                    backgroundColor: 'rgba(0, 119, 204, 0.3)'
-                }]
-            }
-        };
-        var chart = new Chart(ctx, config);
+        graphSolicitudesEntidad(cantidadSolicitudesEntidad);   
     });
 }
 function toCurrency(nStr)
 {
-	return 'Q' + nStr.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+	return 'Q.' + nStr.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 }
 function addCommas(nStr)
 {
@@ -53,17 +33,17 @@ function addCommas(nStr)
 }
 function addTotalRegistro(totalRegistros)
 {
-    document.getElementById("divTotalRegistros").innerHTML = addCommas(totalRegistros);
+    document.getElementById("divTotalRegistros").innerHTML = "<h3>"+addCommas(totalRegistros)+"</h3>";
 }
 function addTotalAsignadoFederacion(totalAsignado)
 {
-    document.getElementById("divTotalAsignadoFederacion").innerHTML = toCurrency(totalAsignado);
+    document.getElementById("divTotalAsignadoFederacion").innerHTML = "<h3>"+toCurrency(totalAsignado)+"</h3>";
 }
 function drawAsignadoFederacion(montosAsignadosEntidad){
     var contenido = "<table class=\"table table-striped\">"
 									+"<thead>"
 									  +"<tr>"
-									  +"<th>Federacion</th>"
+									  +"<th>Federación</th>"
 									  +"<th>Monto Asignado</th>"
 									+"</thead>"
 									+"<tbody>";
@@ -76,5 +56,27 @@ function drawAsignadoFederacion(montosAsignadosEntidad){
     }
     contenido = contenido + "</tbody></table>";
     document.getElementById("divAsignadoFederacion").innerHTML = contenido;
+}
+function graphSolicitudesEntidad(cantidadSolicitudesEntidad){
+    var labels = [];
+    var data = [];
+    for (var entidad in cantidadSolicitudesEntidad) {
+        labels.push(entidad);
+        data.push(cantidadSolicitudesEntidad[entidad]);
+    }
+    debugger;
+    ctx = document.getElementById("myChart").getContext('2d');
+    var config = {
+        type: 'horizontalBar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Cantidad de Solicitudes por Federación',
+                data: data,
+                backgroundColor: 'rgba(0, 119, 204, 0.3)'
+            }]
+        }
+    };
+    var chart = new Chart(ctx, config);
 }
 graphTop();

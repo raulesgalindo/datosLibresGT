@@ -2,6 +2,7 @@ var express = require('express'),
     router = express.Router(),
     mongoose = require('mongoose'),
     Schema = mongoose.Schema;
+    var RubroFederacion = require('./rubroFederacion.js');
     //mongoClient = require('mongodb').MongoClient,
     //dbUrl = 'mongodb://127.0.0.1:27017/',
     dbUrl = 'mongodb://mongo:27017/datosLibres';
@@ -46,15 +47,7 @@ var express = require('express'),
         var db = mongoose.connection;
         db.on('error', console.error.bind(console, 'connection error:'));
         db.once('open', function() {
-            var rubroSchema   = new Schema({
-                _id: {type:String},
-                "NOMBRE ENTIDAD": {type:String},
-                "NOMBRE GRUPO GASTO": {type:String},
-            
-            });
-            var rubros = mongoose.model('rubrosfederacionesdeportivas', rubroSchema);
-            var query = rubros.find();
-            //db.collection("rubrosfederacionesdeportivas").find()
+            var query = RubroFederacion.find();
             query.where("UNIDAD EJECUTORA").regex(/^FEDERACIÓN/i);
             query.select({"NOMBRE ENTIDAD":1, "NOMBRE GRUPO GASTO":1, "NOMBRE RENGLÓN":1,"ASIGNADO":1,"_id":0});
             query.exec(function (err, result) {
@@ -62,11 +55,8 @@ var express = require('express'),
                     throw err;
                 }
                 db.close();
-                console.log(result);
                 res.send(result);
             });
-        
-            // we're connected!
         });
     };
 
