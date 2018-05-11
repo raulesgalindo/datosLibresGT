@@ -22,10 +22,10 @@ var express = require('express'),
                 if (err) {
                     throw err;
                 }
-                mongoose.disconnect();
                 res.send(result);
             });
         });
+        mongoose.disconnect();
     };
 
 
@@ -44,10 +44,10 @@ var express = require('express'),
                 if (err) {
                     throw err;
                 }
-                mongoose.disconnect();
                 res.send(result);   
             });
         });
+        mongoose.disconnect();
     };
 
 module.exports.get = get;
