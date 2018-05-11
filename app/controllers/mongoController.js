@@ -14,7 +14,6 @@ var express = require('express'),
     get = function (req, res) {
         mongoose.connect(dbUrl);
         var db = mongoose.connection;
-        db.on('error', console.error.bind(console, 'connection error:'));
         db.once('open', function() {
             var query = RubroFederacion.find();
             query.where("UNIDAD EJECUTORA").regex(/^FEDERACIÓN/i);
@@ -35,7 +34,6 @@ var express = require('express'),
     getGasto = function (req, res) {
         mongoose.connect(dbUrl);
         var db = mongoose.connection;
-        db.on('error', console.error.bind(console, 'connection error:'));
         db.once('open', function() {
             var query = GastoGubernamental.find();
             query.where("ESTATUS DEL CONCURSO").regex(/^Terminado adjudicado/i);
