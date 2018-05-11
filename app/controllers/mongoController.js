@@ -23,7 +23,7 @@ var express = require('express'),
                     throw err;
                 }
                 res.send(result);
-                db.close();
+               // db.close();
             });
         });
     };
@@ -45,7 +45,7 @@ var express = require('express'),
                     throw err;
                 }
                 res.send(result);
-                db.close();
+                //db.close();
             });
         });
     };
