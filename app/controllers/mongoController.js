@@ -12,7 +12,7 @@ var express = require('express'),
     
     /******************************************controller para federaciones deportivas.*******************/
     get = function (req, res) {
-        mongoose.connect(dbUrl);
+        mongoose.connect(dbUrl,{ keepAlive: 5000 });
         var db = mongoose.connection;
         db.once('open', function() {
             var query = RubroFederacion.find()
@@ -32,7 +32,7 @@ var express = require('express'),
     /******************************************controller para gastos gubernamentales.*******************/
 
     getGasto = function (req, res) {
-        mongoose.connect(dbUrl);
+        mongoose.connect(dbUrl,{ keepAlive: 5000 });
         var db = mongoose.connection;
         db.once('open', function() {
             var query = GastoGubernamental.find()
