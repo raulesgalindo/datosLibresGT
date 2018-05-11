@@ -58,7 +58,7 @@ var express = require('express'),
                 if (err) {
                     throw err;
                 }
-                db.close();
+                //db.close();
                 res.send(result);
             });
         });
@@ -85,7 +85,7 @@ var express = require('express'),
                 if (err) {
                     throw err;
                 }
-                db.close();
+                //db.close();
                 res.send(result);
             });
         });

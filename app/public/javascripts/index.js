@@ -114,9 +114,6 @@ function graphSpending()
         addMontoTotalAdjudicaciones(montoTotalAsignado);
         drawAdjudicacionesEntidad(montosAsignadosEntidad);
         graphTipoGastoEntidad(montosAsignadosGasto);
-        /*addTotalAsignadoFederacion(montoTotalAsignado);
-        drawAsignadoFederacion(montosAsignadosEntidad);
-        graphSolicitudesEntidad(cantidadSolicitudesEntidad); */  
     });
 
 }
