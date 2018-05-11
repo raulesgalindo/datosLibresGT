@@ -52,28 +52,5 @@ var express = require('express'),
         });
     };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports.get = get;
-module.exports.insert = insert;
-module.exports.connect = connect;
 module.exports.getGasto=getGasto;
