@@ -4,15 +4,13 @@ var express = require('express'),
     Schema = mongoose.Schema;
     var RubroFederacion = require('./rubroFederacion.js');
     var GastoGubernamental = require('./gastosGobierno');
-    //mongoClient = require('mongodb').MongoClient,
-    //dbUrl = 'mongodb://127.0.0.1:27017/',
     dbUrl = 'mongodb://mongo:27017/datosLibres';
 
 
     
     /******************************************controller para federaciones deportivas.*******************/
     get = function (req, res) {
-        mongoose.connect(dbUrl,{ keepAlive: 5000 });
+        mongoose.connect(dbUrl,{ keepAlive: 120 });
         var db = mongoose.connection;
         db.once('open', function() {
             var query = RubroFederacion.find()
@@ -25,14 +23,13 @@ var express = require('express'),
                 res.send(result);
             });
         });
-        db.close();
     };
 
 
     /******************************************controller para gastos gubernamentales.*******************/
 
     getGasto = function (req, res) {
-        mongoose.connect(dbUrl,{ keepAlive: 5000 });
+        mongoose.connect(dbUrl,{ keepAlive: 120 });
         var db = mongoose.connection;
         db.once('open', function() {
             var query = GastoGubernamental.find()
@@ -47,7 +44,6 @@ var express = require('express'),
                 res.send(result);   
             });
         });
-        db.close();
     };
 
 module.exports.get = get;
