@@ -25,7 +25,7 @@ var express = require('express'),
                 res.send(result);
             });
         });
-        mongoose.disconnect();
+        db.close();
     };
 
 
@@ -47,7 +47,7 @@ var express = require('express'),
                 res.send(result);   
             });
         });
-        mongoose.disconnect();
+        db.close();
     };
 
 module.exports.get = get;
