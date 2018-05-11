@@ -1,0 +1,31 @@
+extends layout.pug
+block content
+    #divTablaAsc.col-md-12.col-sm-12
+    #page-dash
+      .row
+        .col-lg-12
+          h1.page-header Gastos gubernamentales de Guatemala - Presupuesto 2018
+        // /.col-lg-12
+      // /.row
+      .row
+        .card.text-white.bg-dark.mt-1.col-md-12.col-lg-5
+          .card-header.h3 Cantidad Total de Adjudicaciones
+          .card-body
+            #divTotalAdjudicaciones.card-title.center
+              img(src='images/loader.gif', height='256', width='256')
+        .card.text-white.bg-dark.mt-1.col-md-12.col-lg-7
+          .card-header.h3 Monto total Adjudicado 
+          .card-body
+            #divTotalAdjudicado.card-title.center
+              img(src='images/loader.gif', height='256', width='256')
+      .row
+        .col-lg-8
+          h1 Top 10 de gastos gubernamentales
+      // /.row
+      .row
+        .col-lg-8
+          canvas#myChart2.my-4.w-100
+        .col-lg-4
+          #divAsignadoGasto
+            img(src='images/loader.gif', height='256', width='256')
+          
