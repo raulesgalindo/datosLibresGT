@@ -1,6 +1,6 @@
 function graphTop() 
 {
-    $.get("http://localhost:3000/db/get/presupuesto", function (data, status) { 
+    $.get("http://datoslibresgt.me:3000/db/get/presupuesto", function (data, status) { 
         var arrayLength = data.length;
         var montosAsignadosEntidad = {};
         var cantidadSolicitudesEntidad = {};
@@ -85,7 +85,7 @@ graphTop();
 /*****************************************Funciones para la grafica de la segunda pregunta. Gastos Gubernamentales ***************************/
 function graphSpending() 
 {
-    $.get("http://localhost:3000/db/get/gasto", function (data, status) { 
+    $.get("http://datoslibresgt.me:3000/db/get/gasto", function (data, status) { 
         var arrayLength = data.length;
         var montosAsignadosEntidad = {};
         var montosAsignadosGasto = {};
