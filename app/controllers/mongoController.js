@@ -22,8 +22,8 @@ var express = require('express'),
                 if (err) {
                     throw err;
                 }
+                mongoose.disconnect();
                 res.send(result);
-               // db.close();
             });
         });
     };
@@ -44,8 +44,8 @@ var express = require('express'),
                 if (err) {
                     throw err;
                 }
-                res.send(result);
-                //db.close();
+                mongoose.disconnect();
+                res.send(result);   
             });
         });
     };
