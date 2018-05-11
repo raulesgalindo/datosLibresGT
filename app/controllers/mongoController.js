@@ -15,7 +15,7 @@ var express = require('express'),
         mongoose.connect(dbUrl);
         var db = mongoose.connection;
         db.once('open', function() {
-            var query = RubroFederacion.find()
+            var query = RubroFederacion.findOne()
             .where("UNIDAD EJECUTORA").regex(/^FEDERACIÓN/i)
             .select({"NOMBRE ENTIDAD":1, "NOMBRE GRUPO GASTO":1, "NOMBRE RENGLÓN":1,"ASIGNADO":1,"_id":0})
             .exec(function (err, result) {
@@ -35,7 +35,7 @@ var express = require('express'),
         mongoose.connect(dbUrl);
         var db = mongoose.connection;
         db.once('open', function() {
-            var query = GastoGubernamental.find()
+            var query = GastoGubernamental.findOne()
             .where("ESTATUS DEL CONCURSO").regex(/^Terminado adjudicado/i)
             .where("AÑO DE ADJUDICACIÓN").regex(/^2018/i)
             //{"ESTATUS DEL CONCURSO":"Terminado adjudicado","AÑO DE ADJUDICACIÓN":"2018"}
