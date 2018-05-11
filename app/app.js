@@ -1,6 +1,7 @@
 var indexRouter = require('./routes/index'),
     mongoRouter = require('./routes/mongo'),
     colaboradoresRouter = require('./routes/colaboradores'),
+    pregunta2Router = require('./routes/pregunta2'),
     cookieParser = require('cookie-parser'),
     createError = require('http-errors'),
     bodyParser = require('body-parser'),
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 app.use('/', indexRouter);
 app.use('/db', mongoRouter);
 app.use('/colaboradores', colaboradoresRouter);
+app.use('/pregunta2',pregunta2Router)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

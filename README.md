@@ -12,4 +12,4 @@
 ### With docker
 
  1. Move to root project folder
- 2. sudo docker-compose up --build
+ 2. docker-compose up -d  
