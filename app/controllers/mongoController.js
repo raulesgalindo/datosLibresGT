@@ -11,41 +11,6 @@ var express = require('express'),
 
     
     /******************************************controller para federaciones deportivas.*******************/
-    connect = function () {
-        mongoClient.connect(dbUrl, function (err, db) {
-            if (err) {
-                throw err;
-            }
-            var database = db.db('datosLibres');
-            database.createCollection('presupuesto', function (err) {
-                if (err) {
-                    throw err;
-                }
-                console.log("Collection presupuesto created");
-                db.close();
-            });
-        });
-        console.log('MongoDB connection successful');
-    },
-
-    insert = function (req){
-        mongoClient.connect(dbUrl, function (err, db) {
-            if (err) {
-                throw err;
-            }
-            var database = db.db('datosLibres');
-            database.collection('presupuesto').update({name: "top" },
-                {name: "top", result: req.body},
-                {upsert: true }, function (err) {
-                if (err) {
-                    throw err;
-                }
-                console.log("1 document inserted");
-                db.close();
-            });
-        });
-    },
-
     get = function (req, res) {
         mongoose.connect(dbUrl);
         var db = mongoose.connection;
@@ -58,15 +23,11 @@ var express = require('express'),
                 if (err) {
                     throw err;
                 }
-                //db.close();
+                db.close();
                 res.send(result);
             });
         });
     };
-
-
-
-
 
 
     /******************************************controller para gastos gubernamentales.*******************/
@@ -85,7 +46,7 @@ var express = require('express'),
                 if (err) {
                     throw err;
                 }
-                //db.close();
+                db.close();
                 res.send(result);
             });
         });
